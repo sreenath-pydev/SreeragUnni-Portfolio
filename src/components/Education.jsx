@@ -1,48 +1,64 @@
 import React from 'react';
 import SectionTitle from './SectionTitle';
-
+import { motion } from "framer-motion";
 const Education = () => {
   return (
-    <section id="education" className="py-16 bg-white">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionTitle>Education & Certifications</SectionTitle>
-        
-        <div className="bg-gray-50 p-6 rounded-lg shadow-sm mb-6">
-          <div className="flex flex-col sm:flex-row justify-between mb-4">
-            <h3 className="text-xl font-semibold text-blue-800">ACCA Affiliate (With No paper Exemptions)</h3>
-            <span className="text-blue-600 font-medium">Oct 2024</span>
+    <section id="education" className="py-16 bg-customBeige">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          
+          {/* Left Column - Education Details */}
+          <div className="sm:col-span-2 space-y-6">
+            {[ 
+              {
+                title: "ACCA Affiliate (No Paper Exemptions)",
+                date: "Oct 2024",
+                description: "Specialized in:",
+                subjects: [
+                  "Strategic Business Reporting",
+                  "Advanced Audit and Assurance",
+                  "Strategic Business Leader",
+                  "Advanced Financial Management"
+                ]
+              },
+              {
+                title: "BCom, University of Madras",
+                date: "2021",
+                description: "Achieved First Class with Distinction, acquiring extensive knowledge in commerce, encompassing financial accounting, business law, and economics."
+              },
+              {
+                title: "Class 12 - Commerce, Kendriya Vidyalaya",
+                date: "2018",
+                description: "Completed a curriculum focused on commerce and information practices, preparing for advanced studies in finance & accounting."
+              }
+            ].map((edu, index) => (
+              <motion.div key={index} className="bg-rgbHex p-6 rounded-lg shadow-sm hover:-translate-y-2 duration-300 cursor-pointer hover:shadow-xl"
+              initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}>
+                <h3 className="text-xl font-semibold text-rgbGreen">{edu.title}</h3>
+                <span className="text-rgbGreen font-medium">{edu.date}</span>
+                {edu.description && <p className="mt-2 text-gray-700">{edu.description}</p>}
+                {edu.subjects && (
+                  <ul className="list-disc pl-5 space-y-1 text-gray-700">
+                    {edu.subjects.map((subject, i) => (
+                      <li key={i}>{subject}</li>
+                    ))}
+                  </ul>
+                )}
+              </motion.div>
+            ))}
           </div>
-          <div>
-            <p className="mb-2">Specialized in:</p>
-            <ul className="list-disc pl-5 space-y-1 text-gray-700">
-              <li>Strategic Business Reporting</li>
-              <li>Advanced Audit and Assurance</li>
-              <li>Strategic Business Leader</li>
-              <li>Advanced Financial Management</li>
-            </ul>
-          </div>
-        </div>
-        
-        <div className="bg-gray-50 p-6 rounded-lg shadow-sm mb-6">
-          <div className="flex flex-col sm:flex-row justify-between mb-4">
-            <h3 className="text-xl font-semibold text-blue-800">Bachelor of Commerce (BCom), University of Madras</h3>
-            <span className="text-blue-600 font-medium">2021</span>
-          </div>
-          <p className="text-gray-700">
-            Achieved First Class with Distinction, acquiring extensive knowledge in commerce, 
-            encompassing financial accounting, business law, and economics.
-          </p>
-        </div>
-        
-        <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
-          <div className="flex flex-col sm:flex-row justify-between mb-4">
-            <h3 className="text-xl font-semibold text-blue-800">Class 12 - Commerce, Kendriya Vidyalaya No. 1</h3>
-            <span className="text-blue-600 font-medium">2018</span>
-          </div>
-          <p className="text-gray-700">
-            Completed a curriculum focused on commerce and information practices, 
-            preparing for advanced studies in finance & accounting.
-          </p>
+
+          {/* Right Column - Section Title */}
+          <motion.div className="sm:col-span-1 flex justify-center sm:items-start sm:justify-end order-first sm:order-last"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            viewport={{ once: true }}
+            >
+            <SectionTitle>Education</SectionTitle>
+          </motion.div>
         </div>
       </div>
     </section>
